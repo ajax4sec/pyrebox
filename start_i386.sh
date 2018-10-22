@@ -21,5 +21,19 @@ else
     snapshot="-loadvm $2"
 fi
 
-cp pyrebox.conf.WinXPSP3x86 pyrebox.conf
-./pyrebox-i386 -monitor stdio -m 256 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
+if [ -c "$2" ]
+then 
+	confile ="$2"
+else 
+	confile = ""
+fi
+
+# set configure file
+cp confile pyrebox.conf
+
+# start cmd
+####### cmd from origin pyrebox 
+#./pyrebox-i386 -monitor stdio -m 256 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
+
+####### cmd 
+./pyrebox-i386 -monitor stdio -m 1024 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
