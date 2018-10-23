@@ -16,9 +16,11 @@
 
 if [ -z "$2" ]
 then
-    snapshot=""
+    loadvm=""
 else
-    snapshot="-loadvm $2"
+    #snapshot="-loadvm $2"
+    snapshot="$2"
+    loadvm='-incoming "exec: gzip -c -d $2" -snapshot'
 fi
 
 if [ -c "$2" ]
@@ -29,11 +31,11 @@ else
 fi
 
 # set configure file
-cp confile pyrebox.conf
+cp ${confile} pyrebox.conf
 
 # start cmd
 ####### cmd from origin pyrebox 
 #./pyrebox-i386 -monitor stdio -m 256 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
 
 ####### cmd 
-./pyrebox-i386 -monitor stdio -m 1024 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
+./pyrebox-i386 -monitor stdio -m 1024 -net none -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe ${loadvm}
