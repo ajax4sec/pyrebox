@@ -1316,6 +1316,7 @@ TranslationBlock *tb_gen_code(CPUState *cpu,
        that should be required is to flush the TBs, allocate a new TB,
        re-initialize it per above, and re-do the actual code generation.  */
     gen_code_size = tcg_gen_code(tcg_ctx, tb);
+    
     //Pyrebox, Null out here, so we have the correct context cpu inside TCG code generation
     tcg_ctx->cpu = NULL;
 

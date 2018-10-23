@@ -163,14 +163,17 @@ WORD_TYPE helper_le_ld_name(CPUArchState *env, target_ulong addr,
     }
 
     haddr = addr + env->tlb_table[mmu_idx][index].addend;
+
 #if DATA_SIZE == 1
     res = glue(glue(ld, LSUFFIX), _p)((uint8_t *)haddr);
+    //Pyrebox:
     CPUX86State* env2 = &(X86_CPU((CPUState*)ENV_GET_CPU(env))->env);
     if (is_mem_read_callback_needed(env2->cr[3])){
         helper_qemu_mem_read_callback(ENV_GET_CPU(env), addr, (uintptr_t)qemu_ram_addr_from_host((void*) haddr), DATA_SIZE);
     }
 #else
     res = glue(glue(ld, LSUFFIX), _le_p)((uint8_t *)haddr);
+    //Pyrebox:
     CPUX86State* env2 = &(X86_CPU((CPUState*)ENV_GET_CPU(env))->env);
     if (is_mem_read_callback_needed(env2->cr[3])){
         helper_qemu_mem_read_callback(ENV_GET_CPU(env), addr, (uintptr_t)qemu_ram_addr_from_host((void*) haddr), DATA_SIZE);
@@ -350,6 +353,7 @@ void helper_le_st_name(CPUArchState *env, target_ulong addr, DATA_TYPE val,
     haddr = addr + env->tlb_table[mmu_idx][index].addend;
 #if DATA_SIZE == 1
     glue(glue(st, SUFFIX), _p)((uint8_t *)haddr, val);
+    //Pyrebox:
     CPUX86State* env2 = &(X86_CPU((CPUState*)ENV_GET_CPU(env))->env);
     if (is_mem_write_callback_needed(env2->cr[3])){
         helper_qemu_mem_write_callback(ENV_GET_CPU(env), addr, (uintptr_t)qemu_ram_addr_from_host((void*) haddr), val, DATA_SIZE);
@@ -357,6 +361,7 @@ void helper_le_st_name(CPUArchState *env, target_ulong addr, DATA_TYPE val,
 
 #else
     glue(glue(st, SUFFIX), _le_p)((uint8_t *)haddr, val);
+    //Pyrebox:
     CPUX86State* env2 = &(X86_CPU((CPUState*)ENV_GET_CPU(env))->env);
     if (is_mem_write_callback_needed(env2->cr[3])){
         helper_qemu_mem_write_callback(ENV_GET_CPU(env), addr, (uintptr_t)qemu_ram_addr_from_host((void*) haddr), val, DATA_SIZE);
@@ -436,6 +441,7 @@ void helper_be_st_name(CPUArchState *env, target_ulong addr, DATA_TYPE val,
 
     haddr = addr + env->tlb_table[mmu_idx][index].addend;
     glue(glue(st, SUFFIX), _be_p)((uint8_t *)haddr, val);
+    //Pyrebox:
     CPUX86State* env2 = &(X86_CPU((CPUState*)ENV_GET_CPU(env))->env);
     if (is_mem_write_callback_needed(env2->cr[3])){
         helper_qemu_mem_write_callback(ENV_GET_CPU(env), addr, (uintptr_t)qemu_ram_addr_from_host((void*) haddr), val, DATA_SIZE);

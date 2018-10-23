@@ -14,28 +14,40 @@
 #   * Starts a VNC server on 127.0.0.1 for showing the system display
 #   * Redirects the QEMU monitor to stdio (only configuration supported currently)
 
-if [ -z "$2" ]
-then
-    loadvm=""
-else
-    #snapshot="-loadvm $2"
-    snapshot="$2"
-    loadvm='-incoming "exec: gzip -c -d $2" -snapshot'
-fi
-
-if [ -c "$2" ]
-then 
-	confile ="$2"
-else 
-	confile = ""
-fi
+ARGV=($(getopt -o c:i:s: -- "$@"))
+for((i = 0; i < ${#ARGV[@]}; i++)) {
+    eval opt=${ARGV[$i]}
+    case $opt in
+        -c)
+            ((i++));
+            eval confile=${ARGV[$i]}
+            ;;
+        -i)
+            ((i++));
+            eval imgfile=${ARGV[$i]}
+            ;;
+        -s)
+            ((i++));
+            eval snapfile=${ARGV[$i]}
+            ;;    
+        --)
+            break
+            ;;
+    esac
+}
+echo "confile  : "${confile}
+echo "imgfile  : "${imgfile}
+echo "snapfile : "${snapfile}
 
 # set configure file
-cp ${confile} pyrebox.conf
+if [ -n "${confile}" ]
+then
+    cp ${confile} pyrebox.conf
+fi
 
 # start cmd
 ####### cmd from origin pyrebox 
 #./pyrebox-i386 -monitor stdio -m 256 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
 
 ####### cmd 
-./pyrebox-i386 -monitor stdio -m 1024 -net none -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe ${loadvm}
+./pyrebox-i386 -monitor stdio -m 1024 -net none -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0 -drive file=${imgfile},index=0,media=disk,format=qcow2,cache=unsafe -incoming "exec: gzip -c -d ${snapfile}" -snapshot

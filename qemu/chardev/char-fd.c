@@ -91,7 +91,7 @@ static gboolean fd_chr_read(QIOChannel *chan, GIOCondition cond, void *opaque)
     // We also apply the same approach to fd_chr_read_poll,
     // which determines the number of bytes to read, and causes this function
     // to be called.
-
+    //pyrebox
     int lock_result = pthread_mutex_trylock(&pyrebox_mutex);
     if (lock_result == EBUSY){
         return TRUE;
