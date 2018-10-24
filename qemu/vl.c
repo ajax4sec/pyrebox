@@ -3142,7 +3142,7 @@ int main(int argc, char **argv, char **envp)
             popt = lookup_opt(argc, argv, &optarg, &optind);
             switch (popt->index) {
             case QEMU_OPTION_conf:
-	        pyrebox_conf_name = optarg;
+	            pyrebox_conf_name = optarg;
                 break; 
             case QEMU_OPTION_nodefconfig:
             case QEMU_OPTION_nouserconfig:
