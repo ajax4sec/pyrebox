@@ -84,8 +84,8 @@ void notify_cpu_executing(CPUState* cpu){
     }
 }
 
-void helper_hello_world(){
-    printf("Hello World\n");
+void helper_qemu_hello_world(void){
+    printf("My Hello World\n");
 }
 
 void helper_qemu_block_begin_callback(CPUState* cpu,TranslationBlock* tb){

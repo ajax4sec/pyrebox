@@ -42,12 +42,12 @@ void helper_qemu_opcode_range_callback(CPUState* cpu, target_ulong from, target_
 
 void helper_qemu_trigger_cpu_loop_exit_if_needed(CPUState* cpu);
 
+void helper_qemu_hello_world(void);
+
 //Emulation time
 //Always needed
 void notify_cpu_executing(CPUState* cpu);
 //Always needed
 void qemu_tlb_exec_callback(CPUState* cpu,target_ulong vaddr);
 
-
-void helper_hello_world();
 #endif

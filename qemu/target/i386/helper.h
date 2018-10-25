@@ -17,7 +17,7 @@ DEF_HELPER_1(qemu_insn_end_callback, void, ptr)
 DEF_HELPER_5(qemu_opcode_range_callback, void, ptr,tl,tl,i32,tl)
 DEF_HELPER_1(qemu_trigger_cpu_loop_exit_if_needed, void, ptr)
 
-DEF_HELPER_0(hello_world, void)
+DEF_HELPER_0(qemu_hello_world, void)
 
 DEF_HELPER_3(write_eflags, void, env, tl, i32)
 DEF_HELPER_1(read_eflags, tl, env)
