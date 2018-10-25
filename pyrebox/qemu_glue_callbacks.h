@@ -42,7 +42,8 @@ void helper_qemu_opcode_range_callback(CPUState* cpu, target_ulong from, target_
 
 void helper_qemu_trigger_cpu_loop_exit_if_needed(CPUState* cpu);
 
-void helper_qemu_hello_world(void);
+//ajax
+//void helper_qemu_hello_world(void);
 
 //Emulation time
 //Always needed
