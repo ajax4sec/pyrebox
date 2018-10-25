@@ -4694,6 +4694,10 @@ static target_ulong disas_insn(DisasContext *s, CPUState *cpu)
 
     s->pc_start = s->pc = pc_start;
     s->override = -1;
+
+    gen_helper_hello_world();
+    
+
 #ifdef TARGET_X86_64
     s->rex_x = 0;
     s->rex_b = 0;

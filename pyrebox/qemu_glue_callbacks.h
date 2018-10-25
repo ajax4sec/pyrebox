@@ -48,4 +48,6 @@ void notify_cpu_executing(CPUState* cpu);
 //Always needed
 void qemu_tlb_exec_callback(CPUState* cpu,target_ulong vaddr);
 
+
+void helper_hello_world();
 #endif

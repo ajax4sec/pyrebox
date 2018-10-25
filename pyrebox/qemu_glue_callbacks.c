@@ -84,6 +84,10 @@ void notify_cpu_executing(CPUState* cpu){
     }
 }
 
+void helper_hello_world(){
+    printf("Hello World\n");
+}
+
 void helper_qemu_block_begin_callback(CPUState* cpu,TranslationBlock* tb){
     callback_params_t params;
 #if defined(TARGET_I386) || defined(TARGET_X86_64)
