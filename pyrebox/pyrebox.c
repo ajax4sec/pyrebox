@@ -128,12 +128,14 @@ int pyrebox_init(const char *pyrebox_conf_str){
   PyTuple_SetItem(py_args_tuple, 2, volatility_path_str); 
   PyTuple_SetItem(py_args_tuple, 3, conf_name_str);
 
+  printf("init.py start\n");
   py_init = PyDict_GetItemString(py_global_dict, "init");
   PyObject* vol_profile = PyObject_CallObject(py_init,py_args_tuple);
   if (vol_profile == 0 || vol_profile == Py_None){
       return 1;
   }
   Py_DECREF(py_args_tuple);
+  printf("init.py end\n");
 
   PyObject* vol_prof_repr = PyObject_Repr(vol_profile);
   const char* s = PyString_AsString(vol_prof_repr);

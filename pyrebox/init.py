@@ -221,6 +221,7 @@ def init_volatility():
 
 def init(platform, root_path, volatility_path, conf_name):
     try:
+        print "in init.py\n"
         # Just configure basic logging
         import logging
         logging.basicConfig()
