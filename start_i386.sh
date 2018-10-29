@@ -42,7 +42,7 @@ echo "snapfile : "${snapfile}
 # set configure file
 if [ -n "${confile}" ]
 then
-    cp ${confile} pyrebox.conf
+    cp ${confile} /home/xxj56/git/pyrebox_ajax/pyrebox.conf
 fi
 
 # start cmd
@@ -50,4 +50,4 @@ fi
 #./pyrebox-i386 -monitor stdio -m 256 -usb -usbdevice tablet -drive file=$1,index=0,media=disk,format=qcow2,cache=unsafe -vnc 127.0.0.1:0 ${snapshot}
 
 ####### cmd 
-./pyrebox-i386 -monitor stdio -m 1024 -net none -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0 -drive file=${imgfile},index=0,media=disk,format=qcow2,cache=unsafe -incoming "exec: gzip -c -d ${snapfile}" -snapshot
+/home/xxj56/git/pyrebox_ajax/pyrebox-i386 -monitor stdio -m 1024 -net none -device qemu-xhci,id=xhci -device usb-tablet,bus=xhci.0 -drive file=${imgfile},index=0,media=disk,format=qcow2,cache=unsafe -incoming "exec: gzip -c -d ${snapfile}" -snapshot
